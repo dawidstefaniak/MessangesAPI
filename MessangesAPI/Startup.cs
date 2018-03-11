@@ -2,8 +2,11 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using MessangesAPI.Entities;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Mvc.Formatters;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
@@ -23,7 +26,11 @@ namespace MessangesAPI
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddMvc();
+            services.AddMvc(o => o.OutputFormatters.Add(new XmlDataContractSerializerOutputFormatter()));
+            var connectionString = @"Server=(localdb)\mssqllocaldb;Database=MessangerDB;Trusted_Connection=True;";
+            services.AddDbContext<MessagesContext>(o=>o.UseSqlServer(connectionString));
+            //TODO hide connection String
+
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
