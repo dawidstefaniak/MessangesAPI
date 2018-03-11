@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 
 namespace MessangesAPI.Entities
 {
+    //TODO Use Authentication Tools instead of saving password as string
     public class User
     {
         [Key]

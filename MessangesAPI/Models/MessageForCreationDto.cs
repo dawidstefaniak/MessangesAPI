@@ -5,11 +5,8 @@ using System.Threading.Tasks;
 
 namespace MessangesAPI.Models
 {
-    public class MessageDto
+    public class MessageForCreationDto
     {
-        public int MessageId { get; set; }
-        public int SenderUserId { get; set; }
-        public int ReceiverUserId { get; set; }
         public string MessageText { get; set; }
     }
 }
