@@ -11,5 +11,6 @@ namespace MessangesAPI.Services
         User GetUser(int id);
         void AddMessage(int ReceiverId, int SenderId, Message message);
         bool UserExists(int userId);
+        bool Save();
     }
 }

@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace MessangesAPI.Entities
 {
-    public class MessagesContext : DbContext
+    public sealed class MessagesContext : DbContext
     {
         public MessagesContext(DbContextOptions<MessagesContext> options)
             : base(options)

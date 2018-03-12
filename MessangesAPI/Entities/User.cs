@@ -21,8 +21,8 @@ namespace MessangesAPI.Entities
         [MaxLength(50)]
         public string Password { get; set; }
 
-        public virtual ICollection<Message> MessagesSent { get; set; }
+        public virtual ICollection<Message> MessagesSent { get; set; } = new List<Message>();
 
-        public virtual ICollection<Message> MessagesReceived { get; set; }
+        public virtual ICollection<Message> MessagesReceived { get; set; } = new List<Message>();
     }
 }

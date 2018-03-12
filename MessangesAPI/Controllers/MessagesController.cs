@@ -11,7 +11,7 @@ namespace MessangesAPI.Controllers
     [Route("api/message")]
     public class MessagesController : Controller
     {
-        private IMessangerRepository _messangerRepository;
+        private readonly IMessangerRepository _messangerRepository;
 
         public MessagesController(IMessangerRepository messangerRepository)
         {
@@ -47,6 +47,11 @@ namespace MessangesAPI.Controllers
             //Adding message to DB
             _messangerRepository.AddMessage(receiverId, senderId, finalMessage);
 
+            //Saving changes
+            if (!_messangerRepository.Save())
+            {
+                return StatusCode(500, "Problem while handling your request.");
+            }
             //For now is useless
             var createdMessageToReturn = AutoMapper.Mapper.Map<Models.MessageDto>(finalMessage);
 

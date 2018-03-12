@@ -22,7 +22,6 @@ namespace MessangesAPI.Services
             var receiver = GetUser(ReceiverId);
             var sender = GetUser(SenderId);
 
-            //CRASHING AHH
             receiver.MessagesReceived.Add(message);
             sender.MessagesSent.Add(message);
         }
@@ -36,6 +35,11 @@ namespace MessangesAPI.Services
         public bool UserExists(int userId)
         {
             return _context.Users.Any(c => c.UserId == userId);
+        }
+
+        public bool Save()
+        {
+            return (_context.SaveChanges() >= 0);
         }
     }
 }
