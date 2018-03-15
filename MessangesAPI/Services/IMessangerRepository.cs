@@ -12,5 +12,6 @@ namespace MessangesAPI.Services
         void AddMessage(int ReceiverId, int SenderId, Message message);
         bool UserExists(int userId);
         bool Save();
+        IEnumerable<Message> getMessages(int userId);
     }
 }

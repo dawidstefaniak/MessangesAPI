@@ -12,18 +12,17 @@ namespace MessangesAPI.Entities
         public MessagesContext(DbContextOptions<MessagesContext> options)
             : base(options)
         {
-            Database.Migrate();
+            Database.EnsureCreated();
         }
+
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            
-
             modelBuilder.Entity<Message>()
                 .HasOne(p => p.Receiver)
                 .WithMany(t => t.MessagesReceived)
                 .HasForeignKey(m => m.ReceiverUserId)
                 .OnDelete(DeleteBehavior.Restrict);
-
+            
             modelBuilder.Entity<Message>()
                 .HasOne(p => p.Sender)
                 .WithMany(t => t.MessagesSent)

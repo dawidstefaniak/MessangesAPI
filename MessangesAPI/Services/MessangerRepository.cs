@@ -17,13 +17,18 @@ namespace MessangesAPI.Services
         }
 
         //Add Message object to list of Messages Received for Receiver and Sent for Sender
-        public void AddMessage (int ReceiverId, int SenderId, Message message)
+        public void AddMessage(int ReceiverId, int SenderId, Message message)
         {
             var receiver = GetUser(ReceiverId);
             var sender = GetUser(SenderId);
 
             receiver.MessagesReceived.Add(message);
             sender.MessagesSent.Add(message);
+        }
+
+        public IEnumerable<Message> getMessages(int userId)
+        {
+            return _context.Messages.Where(c => c.SenderUserId == userId || c.ReceiverUserId == userId).ToList();
         }
 
         public User GetUser(int id)

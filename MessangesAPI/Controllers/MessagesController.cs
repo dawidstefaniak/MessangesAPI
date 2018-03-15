@@ -57,5 +57,21 @@ namespace MessangesAPI.Controllers
 
             return Ok();
         }
+
+        [HttpGet("getmessages/{userId}")]
+        public IActionResult GetMessages(int userId)
+        {
+            if(!_messangerRepository.UserExists(userId))
+            {
+                return NotFound();
+            }
+            var messages = _messangerRepository.getMessages(userId);
+            if(messages == null)
+            {
+                return NotFound();
+            }
+            var MessagesToReturn = AutoMapper.Mapper.Map<IEnumerable<MessageDto>>(messages);
+            return Ok(MessagesToReturn);
+        }
     }
 }

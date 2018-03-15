@@ -27,7 +27,6 @@ namespace MessangesAPI
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            
             services.AddMvc(o => o.OutputFormatters.Add(new XmlDataContractSerializerOutputFormatter()));
             var connectionString = @"Server=(localdb)\mssqllocaldb;Database=MessangerDB;Trusted_Connection=True;";
             services.AddDbContext<MessagesContext>(o=>o.UseSqlServer(connectionString));
