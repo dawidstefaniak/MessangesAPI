@@ -51,7 +51,7 @@ namespace MessangesAPI.Controllers
 
             var userToAdd = Mapper.Map<Entities.User>(user);
 
-            //If false, username exists
+            //If AddUser method false, username exists
             if (!_messangerRepository.AddUser(userToAdd))
             {
                 return BadRequest();

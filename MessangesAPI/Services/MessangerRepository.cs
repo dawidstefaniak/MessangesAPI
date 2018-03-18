@@ -49,15 +49,35 @@ namespace MessangesAPI.Services
             return (_context.SaveChanges() >= 0);
         }
 
+        /// <summary>
+        /// Returns true if user added
+        /// </summary>
+        /// <param name="user"></param>
+        /// <returns></returns>
         public bool AddUser(User user)
+        {
+            if (!UsernameExist(user))
+            {
+                _context.Users.Add(user);
+                return true;
+            }
+
+            return false;
+        }
+
+        /// <summary>
+        /// True if username Exist, false if not
+        /// </summary>
+        /// <param name="user"></param>
+        /// <returns></returns>
+        public bool UsernameExist(User user)
         {
             IEnumerable<User> users = _context.Users.Where(e => e.UserName == user.UserName);
             foreach (var usersloop in users)
             {
-                return false;
+                return true;
             }
-           _context.Users.Add(user);
-            return true;
+            return false;
         }
     }
 }
