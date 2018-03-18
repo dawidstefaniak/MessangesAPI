@@ -6,16 +6,11 @@ using System.Threading.Tasks;
 
 namespace MessangesAPI.Models
 {
-    public class UserDto
+    public class UserToReturnDto
     {
-        public int Id { get; set; }
         public string UserName { get; set; }
-        public string Password { get; set; }
         public string FirstName { get; set; }
         public string SecondName { get; set; }
-        public virtual ICollection<Message> MessagesSent { get; set; } = new List<Message>();
-
-        public virtual ICollection<Message> MessagesReceived { get; set; } = new List<Message>();
     }
 }
 

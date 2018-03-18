@@ -17,12 +17,21 @@ namespace MessangesAPI.Entities
         [Required]
         [MaxLength(50)]
         public string UserName { get; set; }
+
+        [MaxLength(50)]
+        public string FirstName { get; set; }
+        
+        [MaxLength(50)]
+        public string SecondName { get; set; }
+
+        public DateTime CreationDate { get; set; }
+
         [Required]
         [MaxLength(50)]
         public string Password { get; set; }
 
-        public virtual ICollection<Message> MessagesSent { get; set; } = new List<Message>();
 
+        public virtual ICollection<Message> MessagesSent { get; set; } = new List<Message>();
         public virtual ICollection<Message> MessagesReceived { get; set; } = new List<Message>();
     }
 }

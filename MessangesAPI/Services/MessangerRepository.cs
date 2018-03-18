@@ -46,5 +46,10 @@ namespace MessangesAPI.Services
         {
             return (_context.SaveChanges() >= 0);
         }
+
+        public void AddUser(User user)
+        {
+            _context.Users.Add(user);
+        }
     }
 }
