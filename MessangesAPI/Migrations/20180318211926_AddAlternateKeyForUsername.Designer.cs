@@ -11,9 +11,10 @@ using System;
 namespace MessangesAPI.Migrations
 {
     [DbContext(typeof(MessagesContext))]
-    partial class MessagesContextModelSnapshot : ModelSnapshot
+    [Migration("20180318211926_AddAlternateKeyForUsername")]
+    partial class AddAlternateKeyForUsername
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

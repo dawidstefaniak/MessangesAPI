@@ -4,6 +4,8 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.Extensions.Configuration;
+using Remotion.Linq.Clauses;
 
 namespace MessangesAPI.Services
 {
@@ -47,9 +49,15 @@ namespace MessangesAPI.Services
             return (_context.SaveChanges() >= 0);
         }
 
-        public void AddUser(User user)
+        public bool AddUser(User user)
         {
-            _context.Users.Add(user);
+            IEnumerable<User> users = _context.Users.Where(e => e.UserName == user.UserName);
+            foreach (var usersloop in users)
+            {
+                return false;
+            }
+           _context.Users.Add(user);
+            return true;
         }
     }
 }

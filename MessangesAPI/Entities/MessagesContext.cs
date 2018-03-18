@@ -27,7 +27,11 @@ namespace MessangesAPI.Entities
                 .HasOne(p => p.Sender)
                 .WithMany(t => t.MessagesSent)
                 .HasForeignKey(m => m.SenderUserId)
-                .OnDelete(DeleteBehavior.Restrict);                
+                .OnDelete(DeleteBehavior.Restrict);
+
+            modelBuilder.Entity<User>()
+                .HasAlternateKey(c => c.UserName)
+                .HasName("AlternateKey_Username");
         }
 
         public DbSet<Message> Messages { get; set; }

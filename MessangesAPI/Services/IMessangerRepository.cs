@@ -10,7 +10,7 @@ namespace MessangesAPI.Services
     {
         User GetUser(int id);
         void AddMessage(int ReceiverId, int SenderId, Message message);
-        void AddUser(User user);
+        bool AddUser(User user);
         bool UserExists(int userId);
         bool Save();
         IEnumerable<Message> GetMessages(int userId);

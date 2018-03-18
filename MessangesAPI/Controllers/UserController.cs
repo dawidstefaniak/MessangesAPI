@@ -50,8 +50,14 @@ namespace MessangesAPI.Controllers
             }
 
             var userToAdd = Mapper.Map<Entities.User>(user);
-            _messangerRepository.AddUser(userToAdd);
 
+            //If false, username exists
+            if (!_messangerRepository.AddUser(userToAdd))
+            {
+                return BadRequest();
+            }
+
+            //If false, there were problem with saving to database
             if (!_messangerRepository.Save())
             {
                 return StatusCode(500, "Server error");
