@@ -24,5 +24,7 @@ namespace MessangesAPI.Entities
         [MaxLength(500)]
         public string MessageText { get; set; }
 
+        public DateTime SentDate { get; set; } = DateTime.Now;
+
     }
 }

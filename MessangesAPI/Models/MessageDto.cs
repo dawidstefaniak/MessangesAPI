@@ -10,6 +10,7 @@ namespace MessangesAPI.Models
         public int MessageId { get; set; }
         public int SenderUserId { get; set; }
         public int ReceiverUserId { get; set; }
+        public DateTime SentDate { get; set; }
         public string MessageText { get; set; }
     }
 }

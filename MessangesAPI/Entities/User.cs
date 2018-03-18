@@ -24,10 +24,7 @@ namespace MessangesAPI.Entities
         [MaxLength(50)]
         public string SecondName { get; set; }
 
-        public DateTime CreationDate { get; set; }
-
-        [MaxLength(10)]
-        public string TestString { get; set; }
+        public DateTime CreationDate { get; set; } = DateTime.Now;
 
         [Required]
         [MaxLength(50)]

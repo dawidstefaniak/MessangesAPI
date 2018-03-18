@@ -18,7 +18,7 @@ namespace MessangesAPI.Controllers
             _messangerRepository = messangerRepository;
         }
 
-        [HttpGet("{userId}")]
+        [HttpGet("getUser/{userId}")]
         public IActionResult GetUserById(int userId)
         {
             //if (userId == null)
@@ -32,7 +32,7 @@ namespace MessangesAPI.Controllers
             }
 
             var userObject = _messangerRepository.GetUser(userId);
-            var userToReturn = Mapper.Map<UserDto>(userObject);
+            var userToReturn = Mapper.Map<UserToReturnDto>(userObject);
             return Ok(userToReturn);
         }
 
