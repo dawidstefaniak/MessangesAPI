@@ -26,6 +26,9 @@ namespace MessangesAPI.Entities
 
         public DateTime CreationDate { get; set; }
 
+        [MaxLength(10)]
+        public string TestString { get; set; }
+
         [Required]
         [MaxLength(50)]
         public string Password { get; set; }

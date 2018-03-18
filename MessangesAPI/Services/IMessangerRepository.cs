@@ -13,6 +13,6 @@ namespace MessangesAPI.Services
         void AddUser(User user);
         bool UserExists(int userId);
         bool Save();
-        IEnumerable<Message> getMessages(int userId);
+        IEnumerable<Message> GetMessages(int userId);
     }
 }

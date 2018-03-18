@@ -11,9 +11,10 @@ using System;
 namespace MessangesAPI.Migrations
 {
     [DbContext(typeof(MessagesContext))]
-    partial class MessagesContextModelSnapshot : ModelSnapshot
+    [Migration("20180318171044_AdditionalMigration")]
+    partial class AdditionalMigration
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -57,9 +58,6 @@ namespace MessangesAPI.Migrations
 
                     b.Property<string>("SecondName")
                         .HasMaxLength(50);
-
-                    b.Property<string>("TestString")
-                        .HasMaxLength(10);
 
                     b.Property<string>("UserName")
                         .IsRequired()

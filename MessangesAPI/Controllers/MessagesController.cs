@@ -65,7 +65,7 @@ namespace MessangesAPI.Controllers
             {
                 return NotFound();
             }
-            var messages = _messangerRepository.getMessages(userId);
+            var messages = _messangerRepository.GetMessages(userId);
             if(messages == null)
             {
                 return NotFound();

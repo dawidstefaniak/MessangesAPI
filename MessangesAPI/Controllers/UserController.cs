@@ -12,14 +12,14 @@ namespace MessangesAPI.Controllers
     [Route("api/user")]
     public class UserController : Controller
     {
-        private IMessangerRepository _messangerRepository;
+        private readonly IMessangerRepository _messangerRepository;
         public UserController(IMessangerRepository messangerRepository)
         {
             _messangerRepository = messangerRepository;
         }
 
         [HttpGet("{userId}")]
-        public IActionResult getUserById(int userId)
+        public IActionResult GetUserById(int userId)
         {
             //if (userId == null)
             //{
@@ -43,16 +43,20 @@ namespace MessangesAPI.Controllers
             {
                 return BadRequest();
             }
+
             if(!ModelState.IsValid)
             {
                 return BadRequest();
             }
+
             var userToAdd = Mapper.Map<Entities.User>(user);
             _messangerRepository.AddUser(userToAdd);
+
             if (!_messangerRepository.Save())
             {
                 return StatusCode(500, "Server error");
             }
+
             return Ok();
         }
     }

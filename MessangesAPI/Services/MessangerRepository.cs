@@ -26,7 +26,7 @@ namespace MessangesAPI.Services
             sender.MessagesSent.Add(message);
         }
 
-        public IEnumerable<Message> getMessages(int userId)
+        public IEnumerable<Message> GetMessages(int userId)
         {
             return _context.Messages.Where(c => c.SenderUserId == userId || c.ReceiverUserId == userId).ToList();
         }
