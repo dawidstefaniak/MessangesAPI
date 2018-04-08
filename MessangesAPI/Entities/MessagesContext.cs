@@ -12,7 +12,6 @@ namespace MessangesAPI.Entities
         public MessagesContext(DbContextOptions<MessagesContext> options)
             : base(options)
         {
-            Database.EnsureCreated();
             Database.Migrate();
         }
 
