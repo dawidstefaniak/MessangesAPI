@@ -18,9 +18,11 @@ namespace MessangesAPI.Entities
         [MaxLength(50)]
         public string UserName { get; set; }
 
+        [Required]
         [MaxLength(50)]
         public string FirstName { get; set; }
         
+        [Required]
         [MaxLength(50)]
         public string SecondName { get; set; }
 
@@ -30,8 +32,12 @@ namespace MessangesAPI.Entities
         [MaxLength(50)]
         public string Password { get; set; }
 
+        [Required]
+        public char UserType {get;set;}
+
 
         public virtual ICollection<Message> MessagesSent { get; set; } = new List<Message>();
         public virtual ICollection<Message> MessagesReceived { get; set; } = new List<Message>();
+        public virtual ICollection<Case> Cases { get; set; } = new List<Case>();
     }
 }

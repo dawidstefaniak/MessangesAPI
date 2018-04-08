@@ -17,6 +17,7 @@ namespace MessangesAPI.Entities
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+            
             modelBuilder.Entity<Message>()
                 .HasOne(p => p.Receiver)
                 .WithMany(t => t.MessagesReceived)
@@ -29,11 +30,31 @@ namespace MessangesAPI.Entities
                 .HasForeignKey(m => m.SenderUserId)
                 .OnDelete(DeleteBehavior.Restrict);
 
+            modelBuilder.Entity<Case>()
+                .HasOne(p => p.Officer)
+                .WithMany(t => t.Cases)
+                .HasForeignKey(m=> m.OfficerId)
+                .OnDelete(DeleteBehavior.Restrict);
+                
+            modelBuilder.Entity<Case>()
+                .HasOne(p => p.TypeOfCrime)
+                .WithMany(p => p.Cases)
+                .HasForeignKey(m => m.TypeOfCrimeId)
+                .OnDelete(DeleteBehavior.Restrict);
+
             modelBuilder.Entity<User>()
                 .HasAlternateKey(c => c.UserName)
                 .HasName("AlternateKey_Username");
-        }
 
+            modelBuilder.Entity<Case>()
+                .HasAlternateKey(c => c.RefNumber)
+                .HasName("AlternateKey_RefNumber");
+
+            
+
+        }
+        public DbSet<Case> Cases {get;set;}
+        public DbSet<TypeOfCrime> TypesOfCrime {get;set;}
         public DbSet<Message> Messages { get; set; }
         public DbSet<User> Users { get; set; }
     }
