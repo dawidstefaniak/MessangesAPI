@@ -18,6 +18,20 @@ namespace MessangesAPI.Controllers
             _messangerRepository = messangerRepository;
         }
 
+        //TODO
+        [HttpPost("login")]
+        public IActionResult Login([FromBody] UserToLoginDto user)
+        {
+            if (user == null)
+            {
+                return BadRequest();
+            }
+
+            if(!ModelState.IsValid)
+            {
+                return BadRequest();
+            }
+        }
         [HttpGet("getUser/{userId}")]
         public IActionResult GetUserById(int userId)
         {

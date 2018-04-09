@@ -12,6 +12,7 @@ namespace MessangesAPI.Models
         public string Password { get; set; }
         public string FirstName { get; set; }
         public string SecondName { get; set; }
+        public char UserType {get;set;}
     }
 }
 
