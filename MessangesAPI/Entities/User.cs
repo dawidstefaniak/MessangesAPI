@@ -32,6 +32,7 @@ namespace MessangesAPI.Entities
         [MaxLength(50)]
         public string Password { get; set; }
 
+        //TODO Char not working on SQLite
         [Required]
         public char UserType {get;set;}
 

@@ -1,4 +1,5 @@
 ﻿using MessangesAPI.Entities;
+using MessangesAPI.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -14,5 +15,7 @@ namespace MessangesAPI.Services
         bool UserExists(int userId);
         bool Save();
         IEnumerable<Message> GetMessages(int userId);
+        User GetLoggedUser(User user);
+        bool UserWithUsernameAndPasswordExist(User user);
     }
 }

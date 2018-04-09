@@ -54,7 +54,10 @@ namespace MessangesAPI
             {
                 cfg.CreateMap<Models.MessageForCreationDto, Entities.Message>();
                 cfg.CreateMap<Entities.Message, Models.MessageDto>();
+                cfg.CreateMap<Models.UserToLoginDto,Entities.User>();
+                cfg.CreateMap<Entities.User,Models.LoggedUserToReturnDto>();
                 cfg.CreateMap<Entities.User, Models.UserToReturnDto>();
+                cfg.CreateMap<Entities.User,Models.LoggedUserToReturnDto>();
                 cfg.CreateMap<Models.UserForCreationDto, Entities.User>();
             });
         }

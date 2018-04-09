@@ -1,4 +1,5 @@
 ﻿using MessangesAPI.Entities;
+using MessangesAPI.Models;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -65,6 +66,8 @@ namespace MessangesAPI.Services
             return false;
         }
 
+        
+
         /// <summary>
         /// True if username Exist, false if not
         /// </summary>
@@ -79,5 +82,21 @@ namespace MessangesAPI.Services
             }
             return false;
         }
+
+        public bool UserWithUsernameAndPasswordExist(User user)
+        {
+            var users = _context.Users.Where(c => c.UserName == user.UserName && c.Password == user.Password);
+            foreach (var usersloop in users)
+            {
+                return true;
+            }
+            return false;
+        }
+
+        public User GetLoggedUser(User user)
+        {
+            return _context.Users.Where(c => c.UserName == user.UserName && c.Password == user.Password).FirstOrDefault();
+        }
+
     }
 }

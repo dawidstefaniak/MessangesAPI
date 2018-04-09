@@ -31,6 +31,15 @@ namespace MessangesAPI.Controllers
             {
                 return BadRequest();
             }
+            var UserFromClient = Mapper.Map<Entities.User>(user);
+
+            if(_messangerRepository.UserWithUsernameAndPasswordExist(UserFromClient))
+            {
+                var usertoreturnenumerable = _messangerRepository.GetLoggedUser(UserFromClient);
+                var UserToReturn = Mapper.Map<Models.LoggedUserToReturnDto>(usertoreturnenumerable);
+                return Ok(UserToReturn);
+            }
+            return BadRequest();
         }
         [HttpGet("getUser/{userId}")]
         public IActionResult GetUserById(int userId)
