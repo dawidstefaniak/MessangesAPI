@@ -20,11 +20,24 @@ namespace MessangesAPI.Services
         }
 
         //Add Message object to list of Messages Received for Receiver and Sent for Sender
+        /* 
         public void AddMessage(int ReceiverId, int SenderId, Message message)
         {
             var receiver = GetUser(ReceiverId);
             var sender = GetUser(SenderId);
+            
+            receiver.MessagesReceived.Add(message);
+            sender.MessagesSent.Add(message);
+        }
+        */
 
+        public void AddMessage(Message message)
+        {
+            var receiver = GetUser(message.ReceiverUserId);
+            var sender = GetUser(message.SenderUserId);
+            var currentcase = GetCase(message.CaseId);
+            
+            currentcase.Messages.Add(message);
             receiver.MessagesReceived.Add(message);
             sender.MessagesSent.Add(message);
         }
@@ -39,7 +52,10 @@ namespace MessangesAPI.Services
             //Get user by ID
             return _context.Users.FirstOrDefault(c => c.UserId == id);
         }
-
+        public Case GetCase(int id)
+        {
+            return _context.Cases.FirstOrDefault(c => c.CaseId == id);
+        }
         public bool UserExists(int userId)
         {
             return _context.Users.Any(c => c.UserId == userId);
@@ -98,5 +114,9 @@ namespace MessangesAPI.Services
             return _context.Users.Where(c => c.UserName == user.UserName && c.Password == user.Password).FirstOrDefault();
         }
 
+        public bool CaseExists(int caseId)
+        {
+            return _context.Cases.Any(c => c.CaseId == caseId);
+        }
     }
 }

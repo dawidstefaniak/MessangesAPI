@@ -18,6 +18,35 @@ namespace MessangesAPI.Controllers
             _messangerRepository = messangerRepository;
         }
 
+        [HttpPost("sendMessage")]
+        public IActionResult sendMessage([FromBody] MessageForCreationDto message)
+        {
+            if(message == null)
+            {
+                return BadRequest();
+            }
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+            if (!_messangerRepository.CaseExists(message.CaseId))
+            {
+                return BadRequest();
+            }
+            if (!_messangerRepository.UserExists(message.SenderUserId) || !_messangerRepository.UserExists(message.ReceiverUserId))
+            {
+                return BadRequest();
+            }
+            AutoMapper.Mapper.Map<Entities.Message>(message);
+            if (!_messangerRepository.Save())
+            {
+                return StatusCode(500, "Problem while handling your request.");
+            }
+            return Ok();
+        }
+
+        //Out of date (sender and receiver ID will be in JSON)
+        /*  
         [HttpPost("add/{senderId}/{receiverId}")]
         public IActionResult AddMessage(int senderId, int receiverId, [FromBody] MessageForCreationDto message)
         {
@@ -57,6 +86,7 @@ namespace MessangesAPI.Controllers
 
             return Ok();
         }
+        */
 
         [HttpGet("getmessages/{userId}")]
         public IActionResult GetMessages(int userId)
