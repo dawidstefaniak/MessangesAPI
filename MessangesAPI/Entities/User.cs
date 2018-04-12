@@ -32,10 +32,13 @@ namespace MessangesAPI.Entities
         [MaxLength(50)]
         public string Password { get; set; }
 
-        //TODO Char not working on SQLite
         [Required]
-        public char UserType {get;set;}
+        [MaxLength(1)]
+        public string UserType {get;set;} = "U";
 
+        [Required]
+        [MaxLength(150)]
+        public string Email {get;set;}
 
         public virtual ICollection<Message> MessagesSent { get; set; } = new List<Message>();
         public virtual ICollection<Message> MessagesReceived { get; set; } = new List<Message>();

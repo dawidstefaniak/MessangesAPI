@@ -48,5 +48,6 @@ namespace MessangesAPI.Entities
         [Required]
         public int TypeOfCrimeId {get;set;}
 
+        public virtual ICollection<Message> Messages {get;set;} = new List<Message>();
     }
 }

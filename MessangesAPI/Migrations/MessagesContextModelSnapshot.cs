@@ -71,6 +71,8 @@ namespace MessangesAPI.Migrations
                     b.Property<int>("MessageId")
                         .ValueGeneratedOnAdd();
 
+                    b.Property<int>("CaseId");
+
                     b.Property<string>("MessageText")
                         .HasMaxLength(500);
 
@@ -81,6 +83,8 @@ namespace MessangesAPI.Migrations
                     b.Property<DateTime>("SentDate");
 
                     b.HasKey("MessageId");
+
+                    b.HasIndex("CaseId");
 
                     b.HasIndex("ReceiverUserId");
 
@@ -110,6 +114,10 @@ namespace MessangesAPI.Migrations
 
                     b.Property<DateTime>("CreationDate");
 
+                    b.Property<string>("Email")
+                        .IsRequired()
+                        .HasMaxLength(150);
+
                     b.Property<string>("FirstName")
                         .IsRequired()
                         .HasMaxLength(50);
@@ -126,7 +134,9 @@ namespace MessangesAPI.Migrations
                         .IsRequired()
                         .HasMaxLength(50);
 
-                    b.Property<char>("UserType");
+                    b.Property<string>("UserType")
+                        .IsRequired()
+                        .HasMaxLength(1);
 
                     b.HasKey("UserId");
 
@@ -151,6 +161,11 @@ namespace MessangesAPI.Migrations
 
             modelBuilder.Entity("MessangesAPI.Entities.Message", b =>
                 {
+                    b.HasOne("MessangesAPI.Entities.Case", "Case")
+                        .WithMany("Messages")
+                        .HasForeignKey("CaseId")
+                        .OnDelete(DeleteBehavior.Restrict);
+
                     b.HasOne("MessangesAPI.Entities.User", "Receiver")
                         .WithMany("MessagesReceived")
                         .HasForeignKey("ReceiverUserId")

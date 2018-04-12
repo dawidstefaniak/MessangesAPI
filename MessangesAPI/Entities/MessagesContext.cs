@@ -36,6 +36,12 @@ namespace MessangesAPI.Entities
                 .HasForeignKey(m=> m.OfficerId)
                 .OnDelete(DeleteBehavior.Restrict);
                 
+            modelBuilder.Entity<Message>()
+                .HasOne(p => p.Case)
+                .WithMany(t => t.Messages)
+                .HasForeignKey(m=> m.CaseId)
+                .OnDelete(DeleteBehavior.Restrict);
+
             modelBuilder.Entity<Case>()
                 .HasOne(p => p.TypeOfCrime)
                 .WithMany(p => p.Cases)

@@ -41,6 +41,7 @@ namespace MessangesAPI.Controllers
             }
             return BadRequest();
         }
+        
         [HttpGet("getUser/{userId}")]
         public IActionResult GetUserById(int userId)
         {

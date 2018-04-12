@@ -15,6 +15,9 @@ namespace MessangesAPI.Entities
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int MessageId { get; set; }
 
+        public Case Case {get;set;}
+        public int CaseId {get;set;}
+
         public User Sender { get; set; }
         public int SenderUserId { get; set; }
 
