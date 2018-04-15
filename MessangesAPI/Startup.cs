@@ -36,7 +36,6 @@ namespace MessangesAPI
             //USING SQLITE
             services.AddDbContext<MessagesContext>(o => o.UseSqlite("Data Source=sqlitedatabase.db"));
 
-            //TODO hide connection String
             services.AddScoped<IMessangerRepository, MessangerRepository>();
         }
 

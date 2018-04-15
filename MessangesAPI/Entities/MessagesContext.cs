@@ -12,7 +12,7 @@ namespace MessangesAPI.Entities
         public MessagesContext(DbContextOptions<MessagesContext> options)
             : base(options)
         {
-            Database.Migrate();
+            Database.EnsureCreated();
         }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
