@@ -45,10 +45,6 @@ namespace MessangesAPI.Controllers
         [HttpGet("getUser/{userId}")]
         public IActionResult GetUserById(int userId)
         {
-            //if (userId == null)
-            //{
-            //    return NotFound();
-            //}
 
             if (!_messangerRepository.UserExists(userId))
             {
