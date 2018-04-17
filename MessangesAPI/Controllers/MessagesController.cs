@@ -19,7 +19,7 @@ namespace MessangesAPI.Controllers
         }
 
         [HttpPost("sendMessage")]
-        public IActionResult sendMessage([FromBody] MessageForCreationDto message)
+        public IActionResult SendMessage([FromBody] MessageForCreationDto message)
         {
             if(message == null)
             {
@@ -58,6 +58,20 @@ namespace MessangesAPI.Controllers
                 return NotFound();
             }
             var MessagesToReturn = AutoMapper.Mapper.Map<IEnumerable<MessageDto>>(messages);
+            return Ok(MessagesToReturn);
+        }
+
+        [HttpGet("getmessagesforcase/{caseId}")]
+        public IActionResult GetMessagesForCase(int caseId)
+        {
+            if (!_messangerRepository.CaseExists(caseId))
+            {
+                return BadRequest();
+            }
+
+            var MessagesFromRepo = _messangerRepository.GetMessagesForCase(caseId);
+            var MessagesToReturn = AutoMapper.Mapper.Map<IEnumerable<MessageDto>>(MessagesFromRepo);
+
             return Ok(MessagesToReturn);
         }
     }

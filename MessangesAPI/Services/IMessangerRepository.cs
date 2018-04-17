@@ -18,5 +18,8 @@ namespace MessangesAPI.Services
         User GetLoggedUser(User user);
         bool UserWithUsernameAndPasswordExist(User user);
         bool CaseExists(int caseId);
+        IEnumerable<Message> GetMessagesForCase(int caseId);
+        IEnumerable<Case> GetCasesForUser(int userId);
+        void AddCase(Case casetoadd);
     }
 }

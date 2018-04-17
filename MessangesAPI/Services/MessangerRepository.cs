@@ -118,5 +118,22 @@ namespace MessangesAPI.Services
         {
             return _context.Cases.Any(c => c.CaseId == caseId);
         }
+
+        public IEnumerable<Message> GetMessagesForCase(int caseId)
+        {
+            return _context.Messages.Where(c => c.CaseId == caseId).ToList();
+        }
+
+        public IEnumerable<Case> GetCasesForUser(int userId)
+        {
+            var currentuser = GetUser(userId);
+            return _context.Cases.Where(c => c.OfficerId == userId || c.Email == currentuser.Email).ToList();
+        }
+
+        //TODO
+        public void AddCase(Case casetoadd)
+        {
+            
+        }
     }
 }
