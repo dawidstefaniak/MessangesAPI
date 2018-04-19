@@ -43,8 +43,14 @@ namespace MessangesAPI.Controllers
             {
                 return BadRequest();
             }
+
             var casetoadd = AutoMapper.Mapper.Map<Entities.Case>(caseforcreation);
             _messangerRepository.AddCase(casetoadd);
+
+            if(!_messangerRepository.Save())
+            {
+                return BadRequest();
+            }
             return Ok();
 
         }

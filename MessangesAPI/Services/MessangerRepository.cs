@@ -19,18 +19,6 @@ namespace MessangesAPI.Services
             _context = context;
         }
 
-        //Add Message object to list of Messages Received for Receiver and Sent for Sender
-        /* 
-        public void AddMessage(int ReceiverId, int SenderId, Message message)
-        {
-            var receiver = GetUser(ReceiverId);
-            var sender = GetUser(SenderId);
-            
-            receiver.MessagesReceived.Add(message);
-            sender.MessagesSent.Add(message);
-        }
-        */
-
         public void AddMessage(Message message)
         {
             var receiver = GetUser(message.ReceiverUserId);
@@ -129,11 +117,23 @@ namespace MessangesAPI.Services
             var currentuser = GetUser(userId);
             return _context.Cases.Where(c => c.OfficerId == userId || c.Email == currentuser.Email).ToList();
         }
+        public bool TypeOfCrimeExists(int typeOfCrimeId)
+        {
+            return _context.TypesOfCrime.Any(c => c.TypeOfCrimeId == typeOfCrimeId);
+        }
+        public TypeOfCrime GetTypeOfCrime(int typeOfCrimeId)
+        {
+            return _context.TypesOfCrime.Where(c => c.TypeOfCrimeId == typeOfCrimeId).FirstOrDefault();
+        }
 
         //TODO
         public void AddCase(Case casetoadd)
         {
-            
+            var policeman = GetUser(casetoadd.OfficerId);
+            var typeofcrime = GetTypeOfCrime(casetoadd.TypeOfCrimeId);
+
+            policeman.Cases.Add(casetoadd);
+            typeofcrime.Cases.Add(casetoadd);
         }
     }
 }
