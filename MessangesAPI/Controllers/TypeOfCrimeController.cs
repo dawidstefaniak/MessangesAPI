@@ -31,5 +31,26 @@ namespace MessangesAPI.Controllers
 
             return Ok(typeofcrimetoreturn);
         }
+        [HttpPost("addtypeofcrime")]
+        public IActionResult AddTypeOfCrime([FromBody] TypeOfCrimeForCreationDto typeofcrime)
+        {
+            if(typeofcrime == null)
+            {
+                return BadRequest();
+            }
+            if(!ModelState.IsValid)
+            {
+                return BadRequest();
+            }
+            var typeofcrimetoadd = AutoMapper.Mapper.Map<Entities.TypeOfCrime>(typeofcrime);
+            _messangerRepository.AddTypeOfCrime(typeofcrimetoadd);
+            if(!_messangerRepository.Save())
+            {
+                return StatusCode(500);
+            }
+            return Ok();
+        }
+
+
     }
 }

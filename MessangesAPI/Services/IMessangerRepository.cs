@@ -23,5 +23,6 @@ namespace MessangesAPI.Services
         void AddCase(Case casetoadd);
         TypeOfCrime GetTypeOfCrime(int typeOfCrimeId);
         bool TypeOfCrimeExists(int typeOfCrimeId);
+        void AddTypeOfCrime(TypeOfCrime typeofcrimetoadd);
     }
 }

@@ -126,6 +126,11 @@ namespace MessangesAPI.Services
             return _context.TypesOfCrime.Where(c => c.TypeOfCrimeId == typeOfCrimeId).FirstOrDefault();
         }
 
+        public void AddTypeOfCrime(TypeOfCrime typeofcrimetoadd)
+        {
+            _context.TypesOfCrime.Add(typeofcrimetoadd);
+        }
+
         //TODO
         public void AddCase(Case casetoadd)
         {
@@ -135,5 +140,8 @@ namespace MessangesAPI.Services
             policeman.Cases.Add(casetoadd);
             typeofcrime.Cases.Add(casetoadd);
         }
+
+        
+
     }
 }
