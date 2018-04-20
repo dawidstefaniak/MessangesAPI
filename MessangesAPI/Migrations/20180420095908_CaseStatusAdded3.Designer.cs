@@ -11,9 +11,10 @@ using System;
 namespace MessangesAPI.Migrations
 {
     [DbContext(typeof(MessagesContext))]
-    partial class MessagesContextModelSnapshot : ModelSnapshot
+    [Migration("20180420095908_CaseStatusAdded3")]
+    partial class CaseStatusAdded3
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -29,7 +30,6 @@ namespace MessangesAPI.Migrations
                         .HasMaxLength(50);
 
                     b.Property<string>("CaseStatus")
-                        .IsRequired()
                         .HasMaxLength(50);
 
                     b.Property<string>("Email")

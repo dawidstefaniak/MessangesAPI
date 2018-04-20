@@ -14,6 +14,7 @@ namespace MessangesAPI.Models
         public string Address { get; set; }
         public string PhoneNumber{ get; set; }
         public string Email { get; set; }
+        public string CaseStatus {get;set;}
         public int OfficerId{ get; set; }
         public int TypeOfCrimeId {get;set;}
     }

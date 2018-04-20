@@ -15,7 +15,7 @@ namespace MessangesAPI.Models
         public string FirstName { get; set; }
 
         public string SecondName { get; set; }
-
+        public string CaseStatus {get;set;}
         public DateTime ReportDate { get; set; }
 
         public string Address { get; set; }

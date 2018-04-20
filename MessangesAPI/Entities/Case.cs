@@ -47,6 +47,9 @@ namespace MessangesAPI.Entities
         public TypeOfCrime TypeOfCrime {get;set;}
         [Required]
         public int TypeOfCrimeId {get;set;}
+        
+        [MaxLength(50)]
+        public string CaseStatus {get;set;}
 
         public virtual ICollection<Message> Messages {get;set;} = new List<Message>();
     }
