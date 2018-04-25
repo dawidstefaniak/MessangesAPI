@@ -27,8 +27,9 @@ namespace MessangesAPI
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddMvc(o => o.OutputFormatters.Add(new XmlDataContractSerializerOutputFormatter()));
-
+            services.AddMvc(options =>{ options.OutputFormatters.Add(new XmlDataContractSerializerOutputFormatter());})
+            .AddJsonOptions(options => options.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore);
+            
             //USING SQL SERVER
             //var connectionString = @"Server=(localdb)\mssqllocaldb;Database=MessangerDB;Trusted_Connection=True;";
             //services.AddDbContext<MessagesContext>(o=>o.UseSqlServer(connectionString));
@@ -59,6 +60,7 @@ namespace MessangesAPI
                 cfg.CreateMap<Entities.User,Models.LoggedUserToReturnDto>();
                 cfg.CreateMap<Models.UserForCreationDto, Entities.User>();
                 cfg.CreateMap<Entities.TypeOfCrime,Models.TypeOfCrimeToReturnDto>();
+                cfg.CreateMap<Entities.Case,Models.CaseToReturnDto>();
             });
         }
     }

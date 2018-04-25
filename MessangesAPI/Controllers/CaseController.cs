@@ -29,7 +29,8 @@ namespace MessangesAPI.Controllers
             }
             
             var cases = _messangerRepository.GetCasesForUser(userId);
-            return Ok(cases);    
+            var casestoreturn = AutoMapper.Mapper.Map<IEnumerable<CaseToReturnDto>>(cases);
+            return Ok(casestoreturn);    
         }
 
         [HttpPost("CreateCase")]
