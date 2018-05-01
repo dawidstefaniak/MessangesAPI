@@ -4,7 +4,7 @@ using System.Collections.Generic;
 
 namespace MessangesAPI.Migrations
 {
-    public partial class ConnectMessageWithCaseInitial : Migration
+    public partial class InitialMigration : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -48,6 +48,7 @@ namespace MessangesAPI.Migrations
                     CaseId = table.Column<int>(nullable: false)
                         .Annotation("Sqlite:Autoincrement", true),
                     Address = table.Column<string>(maxLength: 50, nullable: false),
+                    CaseStatus = table.Column<string>(maxLength: 50, nullable: true),
                     Email = table.Column<string>(maxLength: 50, nullable: false),
                     FirstName = table.Column<string>(maxLength: 50, nullable: false),
                     OfficerId = table.Column<int>(nullable: false),
@@ -82,9 +83,8 @@ namespace MessangesAPI.Migrations
                     MessageId = table.Column<int>(nullable: false)
                         .Annotation("Sqlite:Autoincrement", true),
                     CaseId = table.Column<int>(nullable: false),
-                    MessageText = table.Column<string>(maxLength: 500, nullable: true),
-                    ReceiverUserId = table.Column<int>(nullable: false),
-                    SenderUserId = table.Column<int>(nullable: false),
+                    IsPoliceSender = table.Column<bool>(nullable: false),
+                    MessageText = table.Column<string>(nullable: true),
                     SentDate = table.Column<DateTime>(nullable: false)
                 },
                 constraints: table =>
@@ -95,18 +95,6 @@ namespace MessangesAPI.Migrations
                         column: x => x.CaseId,
                         principalTable: "Cases",
                         principalColumn: "CaseId",
-                        onDelete: ReferentialAction.Restrict);
-                    table.ForeignKey(
-                        name: "FK_Messages_Users_ReceiverUserId",
-                        column: x => x.ReceiverUserId,
-                        principalTable: "Users",
-                        principalColumn: "UserId",
-                        onDelete: ReferentialAction.Restrict);
-                    table.ForeignKey(
-                        name: "FK_Messages_Users_SenderUserId",
-                        column: x => x.SenderUserId,
-                        principalTable: "Users",
-                        principalColumn: "UserId",
                         onDelete: ReferentialAction.Restrict);
                 });
 
@@ -124,16 +112,6 @@ namespace MessangesAPI.Migrations
                 name: "IX_Messages_CaseId",
                 table: "Messages",
                 column: "CaseId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_Messages_ReceiverUserId",
-                table: "Messages",
-                column: "ReceiverUserId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_Messages_SenderUserId",
-                table: "Messages",
-                column: "SenderUserId");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)

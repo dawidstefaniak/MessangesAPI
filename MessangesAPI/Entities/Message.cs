@@ -16,15 +16,12 @@ namespace MessangesAPI.Entities
         public int MessageId { get; set; }
 
         public Case Case {get;set;}
+
         public int CaseId {get;set;}
+        
+        [Required]
+        public bool IsPoliceSender {get;set;}
 
-        public User Sender { get; set; }
-        public int SenderUserId { get; set; }
-
-        public User Receiver { get; set; }
-        public int ReceiverUserId { get; set; }
-
-        [MaxLength(500)]
         public string MessageText { get; set; }
 
         public DateTime SentDate { get; set; } = DateTime.Now;

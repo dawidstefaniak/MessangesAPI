@@ -14,7 +14,6 @@ namespace MessangesAPI.Services
         bool AddUser(User user);
         bool UserExists(int userId);
         bool Save();
-        IEnumerable<Message> GetMessages(int userId);
         User GetLoggedUser(User user);
         bool UserWithUsernameAndPasswordExist(User user);
         bool CaseExists(int caseId);

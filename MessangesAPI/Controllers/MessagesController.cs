@@ -33,32 +33,13 @@ namespace MessangesAPI.Controllers
             {
                 return BadRequest();
             }
-            if (!_messangerRepository.UserExists(message.SenderUserId) || !_messangerRepository.UserExists(message.ReceiverUserId))
-            {
-                return BadRequest();
-            }
-            AutoMapper.Mapper.Map<Entities.Message>(message);
+            var messagetoadd = AutoMapper.Mapper.Map<Entities.Message>(message);
+            _messangerRepository.AddMessage(messagetoadd);
             if (!_messangerRepository.Save())
             {
                 return StatusCode(500, "Problem while handling your request.");
             }
             return Ok();
-        }
-
-        [HttpGet("getmessages/{userId}")]
-        public IActionResult GetMessages(int userId)
-        {
-            if(!_messangerRepository.UserExists(userId))
-            {
-                return NotFound();
-            }
-            var messages = _messangerRepository.GetMessages(userId);
-            if(messages == null)
-            {
-                return NotFound();
-            }
-            var MessagesToReturn = AutoMapper.Mapper.Map<IEnumerable<MessageDto>>(messages);
-            return Ok(MessagesToReturn);
         }
 
         [HttpGet("getmessagesforcase/{caseId}")]

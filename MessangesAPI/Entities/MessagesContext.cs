@@ -17,19 +17,6 @@ namespace MessangesAPI.Entities
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {   
-            
-            modelBuilder.Entity<Message>()
-                .HasOne(p => p.Receiver)
-                .WithMany(t => t.MessagesReceived)
-                .HasForeignKey(m => m.ReceiverUserId)
-                .OnDelete(DeleteBehavior.Restrict);
-            
-            modelBuilder.Entity<Message>()
-                .HasOne(p => p.Sender)
-                .WithMany(t => t.MessagesSent)
-                .HasForeignKey(m => m.SenderUserId)
-                .OnDelete(DeleteBehavior.Restrict);
-
             modelBuilder.Entity<Case>()
                 .HasOne(p => p.Officer)
                 .WithMany(t => t.Cases)

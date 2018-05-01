@@ -20,19 +20,10 @@ namespace MessangesAPI.Services
         }
 
         public void AddMessage(Message message)
-        {
-            var receiver = GetUser(message.ReceiverUserId);
-            var sender = GetUser(message.SenderUserId);
-            var currentcase = GetCase(message.CaseId);
-            
-            currentcase.Messages.Add(message);
-            receiver.MessagesReceived.Add(message);
-            sender.MessagesSent.Add(message);
-        }
-
-        public IEnumerable<Message> GetMessages(int userId)
-        {
-            return _context.Messages.Where(c => c.SenderUserId == userId || c.ReceiverUserId == userId).ToList();
+        {   
+            //var currentcase = GetCase(message.CaseId);
+            //currentcase.Messages.Add(message);
+            _context.Messages.Add(message);
         }
 
         public User GetUser(int id)

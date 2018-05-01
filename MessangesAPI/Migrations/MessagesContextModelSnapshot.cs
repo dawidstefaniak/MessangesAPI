@@ -29,7 +29,6 @@ namespace MessangesAPI.Migrations
                         .HasMaxLength(50);
 
                     b.Property<string>("CaseStatus")
-                        .IsRequired()
                         .HasMaxLength(50);
 
                     b.Property<string>("Email")
@@ -77,22 +76,15 @@ namespace MessangesAPI.Migrations
 
                     b.Property<int>("CaseId");
 
-                    b.Property<string>("MessageText")
-                        .HasMaxLength(500);
+                    b.Property<bool>("IsPoliceSender");
 
-                    b.Property<int>("ReceiverUserId");
-
-                    b.Property<int>("SenderUserId");
+                    b.Property<string>("MessageText");
 
                     b.Property<DateTime>("SentDate");
 
                     b.HasKey("MessageId");
 
                     b.HasIndex("CaseId");
-
-                    b.HasIndex("ReceiverUserId");
-
-                    b.HasIndex("SenderUserId");
 
                     b.ToTable("Messages");
                 });
@@ -168,16 +160,6 @@ namespace MessangesAPI.Migrations
                     b.HasOne("MessangesAPI.Entities.Case", "Case")
                         .WithMany("Messages")
                         .HasForeignKey("CaseId")
-                        .OnDelete(DeleteBehavior.Restrict);
-
-                    b.HasOne("MessangesAPI.Entities.User", "Receiver")
-                        .WithMany("MessagesReceived")
-                        .HasForeignKey("ReceiverUserId")
-                        .OnDelete(DeleteBehavior.Restrict);
-
-                    b.HasOne("MessangesAPI.Entities.User", "Sender")
-                        .WithMany("MessagesSent")
-                        .HasForeignKey("SenderUserId")
                         .OnDelete(DeleteBehavior.Restrict);
                 });
 #pragma warning restore 612, 618

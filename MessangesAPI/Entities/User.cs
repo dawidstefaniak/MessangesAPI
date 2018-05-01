@@ -40,8 +40,6 @@ namespace MessangesAPI.Entities
         [MaxLength(150)]
         public string Email {get;set;}
 
-        public virtual ICollection<Message> MessagesSent { get; set; } = new List<Message>();
-        public virtual ICollection<Message> MessagesReceived { get; set; } = new List<Message>();
         public virtual ICollection<Case> Cases { get; set; } = new List<Case>();
     }
 }
