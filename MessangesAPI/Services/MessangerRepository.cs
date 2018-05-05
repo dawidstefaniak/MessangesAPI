@@ -26,14 +26,14 @@ namespace MessangesAPI.Services
             _context.Messages.Add(message);
         }
 
+        public Case GetCase (int id)
+        {
+            return _context.Cases.FirstOrDefault(c => c.CaseId == id);
+        }
         public User GetUser(int id)
         {
             //Get user by ID
             return _context.Users.FirstOrDefault(c => c.UserId == id);
-        }
-        public Case GetCase(int id)
-        {
-            return _context.Cases.FirstOrDefault(c => c.CaseId == id);
         }
         public bool UserExists(int userId)
         {
@@ -61,7 +61,10 @@ namespace MessangesAPI.Services
             return false;
         }
 
-        
+        public void UpdateCase(Case casetoreturn)
+        {
+            _context.Cases.Update(casetoreturn);
+        }
 
         /// <summary>
         /// True if username Exist, false if not

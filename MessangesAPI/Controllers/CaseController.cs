@@ -6,6 +6,8 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.JsonPatch;
+using AutoMapper;
 
 namespace MessangesAPI.Controllers
 {
@@ -32,6 +34,33 @@ namespace MessangesAPI.Controllers
             var casestoreturn = AutoMapper.Mapper.Map<IEnumerable<CaseToReturnDto>>(cases);
             return Ok(casestoreturn);    
         }
+
+        [HttpPut("UpdateCase")]
+        public IActionResult UpdateCase([FromBody]CaseToReturnDto caseToUpdate)
+        {
+            if (!_messangerRepository.CaseExists(caseToUpdate.CaseId))
+            {
+                return NotFound();
+            }
+
+            if(!ModelState.IsValid)
+            {
+                return BadRequest();
+            }
+
+            var CaseFromDb = _messangerRepository.GetCase(caseToUpdate.CaseId);
+
+            Mapper.Map(caseToUpdate,CaseFromDb);
+            _messangerRepository.UpdateCase(CaseFromDb);
+
+            if(!_messangerRepository.Save())
+            {
+                return StatusCode(500,"Problem while handling your request");
+            }
+
+            return Ok();
+        }
+
 
         [HttpPost("CreateCase")]
         public IActionResult CreateCase([FromBody] CaseForCreationDto caseforcreation)
