@@ -84,5 +84,15 @@ namespace MessangesAPI.Controllers
             return Ok();
 
         }
+        [HttpGet("GetCaseById/{caseId}")]
+        public IActionResult GetCaseById(int caseId)
+        {
+            if (!_messangerRepository.CaseExists(caseId))
+            {
+                return NotFound();
+            }
+            var casetoreturn = _messangerRepository.GetCase(caseId);
+            return Ok(casetoreturn);
+        }
     }
 }
