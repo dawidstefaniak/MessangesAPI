@@ -111,28 +111,12 @@ namespace MessangesAPI.Services
             var currentuser = GetUser(userId);
             return _context.Cases.Where(c => c.OfficerId == userId || c.Email == currentuser.Email).ToList();
         }
-        public bool TypeOfCrimeExists(int typeOfCrimeId)
-        {
-            return _context.TypesOfCrime.Any(c => c.TypeOfCrimeId == typeOfCrimeId);
-        }
-        public TypeOfCrime GetTypeOfCrime(int typeOfCrimeId)
-        {
-            return _context.TypesOfCrime.Where(c => c.TypeOfCrimeId == typeOfCrimeId).FirstOrDefault();
-        }
-
-        public void AddTypeOfCrime(TypeOfCrime typeofcrimetoadd)
-        {
-            _context.TypesOfCrime.Add(typeofcrimetoadd);
-        }
-
         //TODO
         public void AddCase(Case casetoadd)
         {
             var policeman = GetUser(casetoadd.OfficerId);
-            var typeofcrime = GetTypeOfCrime(casetoadd.TypeOfCrimeId);
 
             policeman.Cases.Add(casetoadd);
-            typeofcrime.Cases.Add(casetoadd);
         }
 
         

@@ -43,10 +43,8 @@ namespace MessangesAPI.Entities
         public User Officer {get;set;}
         [Required]
         public int OfficerId{ get; set; }
-
-        public TypeOfCrime TypeOfCrime {get;set;}
-        [Required]
-        public int TypeOfCrimeId {get;set;}
+        
+        public string TypeOfCrime {get;set;}
         
         [MaxLength(50)]
         public string CaseStatus {get;set;}

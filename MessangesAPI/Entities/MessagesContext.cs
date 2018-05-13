@@ -12,7 +12,7 @@ namespace MessangesAPI.Entities
         public MessagesContext(DbContextOptions<MessagesContext> options)
             : base(options)
         {
-            Database.Migrate();
+            Database.EnsureCreated();
         }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
@@ -29,12 +29,6 @@ namespace MessangesAPI.Entities
                 .HasForeignKey(m=> m.CaseId)
                 .OnDelete(DeleteBehavior.Restrict);
 
-            modelBuilder.Entity<Case>()
-                .HasOne(p => p.TypeOfCrime)
-                .WithMany(p => p.Cases)
-                .HasForeignKey(m => m.TypeOfCrimeId)
-                .OnDelete(DeleteBehavior.Restrict);
-
             modelBuilder.Entity<User>()
                 .HasAlternateKey(c => c.UserName)
                 .HasName("AlternateKey_Username");
@@ -47,7 +41,6 @@ namespace MessangesAPI.Entities
 
         }
         public DbSet<Case> Cases {get;set;}
-        public DbSet<TypeOfCrime> TypesOfCrime {get;set;}
         public DbSet<Message> Messages { get; set; }
         public DbSet<User> Users { get; set; }
     }

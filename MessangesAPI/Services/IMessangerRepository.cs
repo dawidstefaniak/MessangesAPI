@@ -20,9 +20,6 @@ namespace MessangesAPI.Services
         IEnumerable<Message> GetMessagesForCase(int caseId);
         IEnumerable<Case> GetCasesForUser(int userId);
         void AddCase(Case casetoadd);
-        TypeOfCrime GetTypeOfCrime(int typeOfCrimeId);
-        bool TypeOfCrimeExists(int typeOfCrimeId);
-        void AddTypeOfCrime(TypeOfCrime typeofcrimetoadd);
         Case GetCase (int id);
         void UpdateCase(Case casetoreturn);
     }

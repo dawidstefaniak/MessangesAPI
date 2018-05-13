@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using MessangesAPI.Controllers;
 using MessangesAPI.Entities;
 using MessangesAPI.Services;
 using Microsoft.AspNetCore.Builder;
@@ -12,7 +13,6 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
-
 namespace MessangesAPI
 {
     public class Startup
@@ -59,9 +59,9 @@ namespace MessangesAPI
                 cfg.CreateMap<Entities.User, Models.UserToReturnDto>();
                 cfg.CreateMap<Entities.User,Models.LoggedUserToReturnDto>();
                 cfg.CreateMap<Models.UserForCreationDto, Entities.User>();
-                cfg.CreateMap<Entities.TypeOfCrime,Models.TypeOfCrimeToReturnDto>();
                 cfg.CreateMap<Entities.Case,Models.CaseToReturnDto>();
                 cfg.CreateMap<Models.CaseToReturnDto,Entities.Case>();
+                cfg.CreateMap<Models.CaseForCreationDto,Entities.Case>();
             });
         }
     }
