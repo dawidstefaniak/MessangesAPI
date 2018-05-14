@@ -19,6 +19,10 @@ namespace MessangesAPI.Services
             _context = context;
         }
 
+        public MessangerRepository()
+        {
+        }
+
         public void AddMessage(Message message)
         {   
             //var currentcase = GetCase(message.CaseId);
@@ -119,7 +123,9 @@ namespace MessangesAPI.Services
             policeman.Cases.Add(casetoadd);
         }
 
-        
-
+        public IEnumerable<User> GetListOfUsers()
+        {
+            return _context.Users.ToList();
+        } 
     }
 }

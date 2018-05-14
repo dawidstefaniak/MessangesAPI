@@ -55,7 +55,11 @@ namespace MessangesAPI.Controllers
             var userToReturn = Mapper.Map<UserToReturnDto>(userObject);
             return Ok(userToReturn);
         }
-
+        [HttpGet("getListOfUsers")]
+        public IActionResult GetListOfUsers()
+        {
+            return Ok(_messangerRepository.GetListOfUsers());
+        }
         [HttpPost("createUser")]
         public IActionResult CreateUser([FromBody] UserForCreationDto user)
         {

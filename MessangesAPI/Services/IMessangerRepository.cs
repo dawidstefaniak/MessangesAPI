@@ -22,5 +22,6 @@ namespace MessangesAPI.Services
         void AddCase(Case casetoadd);
         Case GetCase (int id);
         void UpdateCase(Case casetoreturn);
+        IEnumerable<User> GetListOfUsers();
     }
 }
