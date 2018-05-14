@@ -70,6 +70,11 @@ namespace MessangesAPI.Services
             _context.Cases.Update(casetoreturn);
         }
 
+        public void UpdateUser(User userToReturn)
+        {
+            _context.Users.Update(userToReturn);
+        }
+
         /// <summary>
         /// True if username Exist, false if not
         /// </summary>
@@ -126,6 +131,6 @@ namespace MessangesAPI.Services
         public IEnumerable<User> GetListOfUsers()
         {
             return _context.Users.ToList();
-        } 
+        }
     }
 }

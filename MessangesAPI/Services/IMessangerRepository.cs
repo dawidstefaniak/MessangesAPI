@@ -23,5 +23,7 @@ namespace MessangesAPI.Services
         Case GetCase (int id);
         void UpdateCase(Case casetoreturn);
         IEnumerable<User> GetListOfUsers();
+        void UpdateUser(User userToReturn);
+        
     }
 }

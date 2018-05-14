@@ -55,10 +55,22 @@ namespace MessangesAPI.Controllers
             var userToReturn = Mapper.Map<UserToReturnDto>(userObject);
             return Ok(userToReturn);
         }
+        [HttpGet("getUserToEdit/{userId}")]
+        public IActionResult GetUserToEditById(int userId)
+        {
+            if (!_messangerRepository.UserExists(userId))
+            {
+                return NotFound();
+            }
+            var userObject = _messangerRepository.GetUser(userId);
+            var userToReturn = Mapper.Map<UserListToReturnDto>(userObject);
+            return Ok(userToReturn);
+        }
         [HttpGet("getListOfUsers")]
         public IActionResult GetListOfUsers()
         {
-            return Ok(_messangerRepository.GetListOfUsers());
+            var UserListToReturn = Mapper.Map<IEnumerable<Models.UserListToReturnDto>>(_messangerRepository.GetListOfUsers());
+            return Ok(UserListToReturn);
         }
         [HttpPost("createUser")]
         public IActionResult CreateUser([FromBody] UserForCreationDto user)
@@ -85,6 +97,35 @@ namespace MessangesAPI.Controllers
             if (!_messangerRepository.Save())
             {
                 return StatusCode(500, "Server error");
+            }
+
+            return Ok();
+        }
+        [HttpPut("updateUser")]
+        public IActionResult UpdateUser([FromBody] UserListToReturnDto userToEdit)
+        {
+            if(userToEdit == null)
+            {
+                return BadRequest();
+            }
+            if (!_messangerRepository.UserExists(userToEdit.userId))
+            {
+                return NotFound();
+            }
+
+            if(!ModelState.IsValid)
+            {
+                return BadRequest();
+            }
+
+            var UserFromDb = _messangerRepository.GetUser(userToEdit.userId);
+
+            Mapper.Map(userToEdit,UserFromDb);
+            _messangerRepository.UpdateUser(UserFromDb);
+
+            if(!_messangerRepository.Save())
+            {
+                return StatusCode(500,"Problem while handling your request");
             }
 
             return Ok();
